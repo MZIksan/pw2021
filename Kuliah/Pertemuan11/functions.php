@@ -56,3 +56,15 @@ function Ubah($data)
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
 }
+
+function cari($keyword)
+{
+  $conn = Koneksi();
+  $query = "select * from mahasiswa where nama like '%$keyword%' or npm like '%$keyword%' ";
+  $result = mysqli_query($conn, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+  return $rows;
+}
